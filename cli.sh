@@ -568,6 +568,68 @@ mount_part()
             msg "skip"
         fi
     ;;
+    android)
+        msg -n "/system ... "
+        local target="${CHROOT_DIR}/system"
+        if ! is_mounted "${target}" ; then
+            [ -d "${target}" ] || mkdir -p "${target}"
+            mount -o bind /system "${target}"
+            is_ok "fail" "done"
+        else
+            msg "skip"
+        fi
+
+        msg -n "/sdcard ... "
+        local target="${CHROOT_DIR}/mnt/sdcard"
+        if ! is_mounted "${target}" ; then
+            [ -d "${target}" ] || mkdir -p "${target}"
+            mount -o bind /sdcard "${target}"
+            is_ok "fail" "done"
+        else
+            msg "skip"
+        fi
+
+        msg -n "/dev/binderfs ... "
+        local target="${CHROOT_DIR}/dev/binderfs"
+        if ! is_mounted "${target}" ; then
+            [ -d "${target}" ] || mkdir -p "${target}"
+            mount -o bind /dev/binderfs "${target}"
+            is_ok "fail" "done"
+        else
+            msg "skip"
+        fi
+
+
+        msg -n "/linkerconfig ... "
+        local target="${CHROOT_DIR}/linkerconfig"
+        if ! is_mounted "${target}" ; then
+            [ -d "${target}" ] || mkdir -p "${target}"
+            mount -o bind /linkerconfig "${target}"
+            is_ok "fail" "done"
+        else
+            msg "skip"
+        fi
+
+
+        msg -n "/apex ... "
+        local target="${CHROOT_DIR}/apex"
+        if ! is_mounted "$target"; then
+            [ -d "$target" ] || mkdir -p "$target"
+            mount -o bind /apex "$target"
+            for subfolder in /apex/*; do
+                subfolder_name=$(basename "$subfolder")
+                subfolder_target="$target/$subfolder_name"
+                if ! is_mounted "$subfolder_target"; then
+                    [ -d "$subfolder_target" ] || mkdir -p "$subfolder_target"
+                    mount -o bind "$subfolder" "$subfolder_target"
+                    is_ok "$subfolder_target fail"
+                fi
+            done
+        else
+            msg "skip"
+        fi
+
+    ;;
     sys)
         msg -n "/sys ... "
         local target="${CHROOT_DIR}/sys"
@@ -663,6 +725,9 @@ container_mount()
 
     if [ $# -eq 0 ]; then
         container_mount root proc sys dev shm pts fd tty tun binfmt_misc
+        if [ "${ANDROID}" == "1" ] ; then
+            container_mount android
+        fi
         return $?
     fi
 

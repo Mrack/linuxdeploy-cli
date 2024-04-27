@@ -14,7 +14,7 @@ then
     esac
 fi
 
-[ -n "${SOURCE_PATH}" ] || SOURCE_PATH="http://ftp.debian.org/debian/"
+[ -n "${SOURCE_PATH}" ] || SOURCE_PATH="https://mirrors.tuna.tsinghua.edu.cn/debian/"
 
 apt_install()
 {

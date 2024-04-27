@@ -14,7 +14,7 @@ then
     esac
 fi
 
-[ -n "${SOURCE_PATH}" ] || SOURCE_PATH="http://http.kali.org/kali/"
+[ -n "${SOURCE_PATH}" ] || SOURCE_PATH="https://mirrors.tuna.tsinghua.edu.cn/kali"
 
 do_help()
 {

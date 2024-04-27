@@ -14,7 +14,7 @@ then
     esac
 fi
 
-[ -n "${SOURCE_PATH}" ] || SOURCE_PATH="http://dl-cdn.alpinelinux.org/alpine/"
+[ -n "${SOURCE_PATH}" ] || SOURCE_PATH="https://mirrors.tuna.tsinghua.edu.cn/alpine/"
 
 apk_install()
 {

@@ -17,8 +17,8 @@ fi
 if [ -z "${SOURCE_PATH}" ]
 then
     case "$(get_platform ${ARCH})" in
-    x86*) SOURCE_PATH="http://archive.ubuntu.com/ubuntu/" ;;
-    arm*) SOURCE_PATH="http://ports.ubuntu.com/" ;;
+    x86*) SOURCE_PATH="https://mirrors.tuna.tsinghua.edu.cn/ubuntu/" ;;
+    arm*) SOURCE_PATH="https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/" ;;
     esac
 fi
 

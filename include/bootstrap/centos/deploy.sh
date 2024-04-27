@@ -17,8 +17,8 @@ fi
 if [ -z "${SOURCE_PATH}" ]
 then
     case "$(get_platform ${ARCH})" in
-    x86|arm*) SOURCE_PATH="http://mirror.centos.org/altarch/" ;;
-    x86_64) SOURCE_PATH="http://mirror.centos.org/centos/" ;;
+    x86|arm*) SOURCE_PATH="https://mirrors.tuna.tsinghua.edu.cn/centos-altarch/" ;;
+    x86_64) SOURCE_PATH="https://mirrors.tuna.tsinghua.edu.cn/centos/" ;;
     esac
 fi
 
